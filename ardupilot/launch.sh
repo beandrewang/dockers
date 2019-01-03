@@ -1,1 +1,1 @@
-docker run -it --rm beandrewang/ardupilot
+docker run -it --rm -v $PWD:/ardupilot beandrewang/ardupilot
