@@ -2,7 +2,7 @@
 
 ## Enable GUI
 
-'''
+```
 xhost +local:docker
 
 docker run -it --rm \
@@ -12,6 +12,6 @@ docker run -it --rm \
     ros2
     
 export containerId=$(docker ps -l -q)
-'''
+```
 
 or just call `launch.sh`
