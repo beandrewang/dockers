@@ -1,0 +1,1 @@
+docker exec -it $(docker ps -l -q) /ros2_entrypoint.sh bash
