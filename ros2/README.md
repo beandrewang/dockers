@@ -41,8 +41,6 @@ docker run -it --rm \
     --env="QT_X11_NO_MITSHM=1" \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     beandrewang/ros2
-
-set containerId=$(docker ps -l -q)
 ```
 
 or just call [`launch.cmd`](https://github.com/beandrewang/dockers/blob/master/ros2/launch.cmd)
@@ -50,7 +48,10 @@ or just call [`launch.cmd`](https://github.com/beandrewang/dockers/blob/master/r
 ** Open multi-ternimal **
 
 ```
-for /F "tokens=*" %%g in ('docker ps -l -q') do (set ros2=%%g)
+for /F "tokens=*" %g in ('docker ps -l -q') do (set ros2=%g)
+```
+
+```
 docker exec -it %ros2% /ros2_entrypoint.sh bash
 ```
 
