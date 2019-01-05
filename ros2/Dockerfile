@@ -50,15 +50,10 @@ RUN apt-get update && apt-get install -y \
     pytest-cov \
     pytest-runner \
     setuptools \
-    && apt install --no-install-recommends -y \
+    && apt-get install --no-install-recommends -y \
     libasio-dev \
-    libtinyxml2-dev 
+    libtinyxml2-dev \
     && rm -rf /var/lib/apt/lists/*
-
-# Install dependencies using rosdep
-RUN rosdep init \
-    && rosdep update
-    && rosdep install --from-paths src --ignore-src --rosdistro crystal -y --skip-keys "console_bridge fastcdr fastrtps libopensplice67 libopensplice69 rti-connext-dds-5.3.1 urdfdom_headers"
 
 # setup entrypoint
 COPY ./ros2_entrypoint.sh /
