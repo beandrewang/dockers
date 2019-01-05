@@ -21,38 +21,11 @@ RUN sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb
 ENV ROS_DISTRO crystal
 
 # install ros2 packages
-# Install development tools and ROS tools
 RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-desktop \
-    build-essential \
-    cmake \
-    git \
+    python3-argcomplete \
     python3-colcon-common-extensions \
-    python3-pip \
-    python-rosdep \
     python3-vcstool \
-    wget \
-    && python3 -m pip install -U \
-    argcomplete \
-    flake8 \
-    flake8-blind-except \
-    flake8-builtins \
-    flake8-class-newline \
-    flake8-comprehensions \
-    flake8-deprecated \
-    flake8-docstrings \
-    flake8-import-order \
-    flake8-quotes \
-    git+https://github.com/lark-parser/lark.git@0.7b \
-    pytest-repeat \
-    pytest-rerunfailures \
-    pytest \
-    pytest-cov \
-    pytest-runner \
-    setuptools \
-    && apt-get install --no-install-recommends -y \
-    libasio-dev \
-    libtinyxml2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # setup entrypoint
