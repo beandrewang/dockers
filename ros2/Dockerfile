@@ -21,10 +21,44 @@ RUN sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb
 ENV ROS_DISTRO crystal
 
 # install ros2 packages
+# Install development tools and ROS tools
 RUN apt-get update && apt-get install -y \
     ros-$ROS_DISTRO-desktop \
-    python3-argcomplete \
+    build-essential \
+    cmake \
+    git \
+    python3-colcon-common-extensions \
+    python3-pip \
+    python-rosdep \
+    python3-vcstool \
+    wget \
+    && python3 -m pip install -U \
+    argcomplete \
+    flake8 \
+    flake8-blind-except \
+    flake8-builtins \
+    flake8-class-newline \
+    flake8-comprehensions \
+    flake8-deprecated \
+    flake8-docstrings \
+    flake8-import-order \
+    flake8-quotes \
+    git+https://github.com/lark-parser/lark.git@0.7b \
+    pytest-repeat \
+    pytest-rerunfailures \
+    pytest \
+    pytest-cov \
+    pytest-runner \
+    setuptools \
+    && apt install --no-install-recommends -y \
+    libasio-dev \
+    libtinyxml2-dev 
     && rm -rf /var/lib/apt/lists/*
+
+# Install dependencies using rosdep
+RUN rosdep init \
+    && rosdep update
+    && rosdep install --from-paths src --ignore-src --rosdistro crystal -y --skip-keys "console_bridge fastcdr fastrtps libopensplice67 libopensplice69 rti-connext-dds-5.3.1 urdfdom_headers"
 
 # setup entrypoint
 COPY ./ros2_entrypoint.sh /
