@@ -28,8 +28,13 @@ RUN apt-get update && apt-get install -y \
     python3-vcstool \
     && rm -rf /var/lib/apt/lists/*
 
+ENV HOME /home/docker
+
 # setup entrypoint
 COPY ./ros2_entrypoint.sh /
-RUN chmod +x /ros2_entrypoint.sh
+RUN chmod 777 /ros2_entrypoint.sh
+RUN useradd -ms /bin/bash docker
+USER docker
+WORKDIR /home/docker
 ENTRYPOINT ["/ros2_entrypoint.sh"]
 CMD ["bash"]
