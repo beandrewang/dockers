@@ -13,8 +13,5 @@ RUN chmod -x /tmp/install-preques-ubuntu.sh \
 RUN rm -rf /tmp/install-preques-ubuntu.sh
 COPY ./ardupilot_entrypoint.sh /
 RUN chmod 777 /ardupilot_entrypoint.sh
-RUN useradd -ms /bin/bash docker
-USER docker
-WORKDIR /home/docker
 ENTRYPOINT ["/ardupilot_entrypoint.sh"]
 CMD ["bash"]

@@ -108,22 +108,14 @@ ARDUPILOT_ROOT=$(realpath "$SCRIPT_DIR/../../")
 
 exportline="export PATH=$OPT/$ARM_ROOT/bin:\$PATH";
 grep -Fxq "$exportline" ~/.profile 2>/dev/null || {
-    if maybe_prompt_user "Add $OPT/$ARM_ROOT/bin to your PATH [Y/n]?" ; then
-        echo $exportline >> ~/.profile
-        eval $exportline
-    else
-        echo "Skipping adding $OPT/$ARM_ROOT/bin to PATH."
-    fi
+    echo $exportline >> ~/.profile
+    eval $exportline
 }
 
 exportline2="export PATH=$ARDUPILOT_ROOT/$ARDUPILOT_TOOLS:\$PATH";
 grep -Fxq "$exportline2" ~/.profile 2>/dev/null || {
-    if maybe_prompt_user "Add $ARDUPILOT_ROOT/$ARDUPILOT_TOOLS to your PATH [Y/n]?" ; then
-        echo $exportline2 >> ~/.profile
-        eval $exportline2
-    else
-        echo "Skipping adding $ARDUPILOT_ROOT/$ARDUPILOT_TOOLS to PATH."
-    fi
+    echo $exportline >> ~/.profile
+    eval $exportline
 }
 
 apt-cache search arm-none-eabi
